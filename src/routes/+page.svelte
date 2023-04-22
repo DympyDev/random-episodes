@@ -1,59 +1,88 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import {
+		RANDOM_EPISODE_BOOKMARKLET,
+		ANOTHER_RANDOM_EPISODE_BOOKMARKLET
+	} from '$lib/utils/bookmarklet.helper';
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Random Episodes</title>
+	<meta name="description" content="Random Episodes on your favorite streaming services!" />
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
+	<p>
+		Sometimes you just want to watch a random episode of your favorite show, either because the
+		storyline isn't that deep or it's your 23rd rewatch and you're just looking for the right
+		background noise during dinner.<br />Well, that's where this little tool comes in!
+	</p>
+	<p>
+		I've created a little tool that, when on the episode overview of a specific show, will randomly
+		select a season followed by a random epsiode! Right now, the tool works for:
+	</p>
+	<ul>
+		<li>Disney+</li>
+		<li>Netflix</li>
+		<li>HBO Max</li>
+	</ul>
+</section>
 
-		to your new<br />SvelteKit app
-	</h1>
+<section>
+	<p>
+		To start using this little tool, simple drag-and-drop the following button to your bookmark bar.<br
+		/>
+		Then, simply go to one of the streaming sites mentioned above, open the details of the show you want
+		to watch and click the bookmark!
+	</p>
+	<a class="button" href={RANDOM_EPISODE_BOOKMARKLET}>Random episode!</a>
+</section>
 
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+<section>
+	<p>
+		Want to watch another episode of the same series when you've reached the credits? Don't worry,
+		I've made a bookmark for that as well!<br />Simply drag and drop the following button to your
+		bookmark bar and click it when your episode is running the credits.
+	</p>
+	<a class="button" href={ANOTHER_RANDOM_EPISODE_BOOKMARKLET}>Another random episode!</a>
 </section>
 
 <style>
 	section {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
+		align-items: flex-start;
+		background-color: rgb(23, 26, 33);
+		color: #e3e3e3;
+		box-sizing: border-box;
+		padding: 2rem;
+		border-radius: 12px;
 	}
 
-	h1 {
-		width: 100%;
+	section > *:not(:first-child) {
+		margin-top: 1rem;
 	}
 
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
+	section:first-child {
+		grid-column: 1 / span 2;
 	}
 
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+	.button {
+		background-color: #226ce0;
+		color: #e0fff1;
+		padding: 0.5rem 1rem;
+		border-radius: 2px;
+	}
+
+	.button:hover,
+	.button:focus {
+		background-color: #2e5faa;
+		color: #e0fff1;
+		text-decoration: none;
+	}
+
+	@media (max-width: 720px) {
+		section:first-child {
+			grid-column: 1;
+		}
 	}
 </style>
