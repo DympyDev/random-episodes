@@ -1,5 +1,6 @@
-export const PICK_RANDOM_EPISODE = (/** @type {string} */ postEpisodeSelection) => `const seasonBtns = Array.from(
-    document.querySelectorAll('button[aria-label*="Season"]:not(.slick-arrow)')
+export const PICK_RANDOM_EPISODE = (/** @type {string} */ postEpisodeSelection) => `document.querySelector('button[data-testid=dropdown-button]').click();
+  const seasonBtns = Array.from(
+    document.querySelectorAll('ul[data-testid=dropdown-list] > li')
   );
   const randomSeasonBtn =
     seasonBtns[Math.floor(Math.random() * seasonBtns.length)];
@@ -7,11 +8,11 @@ export const PICK_RANDOM_EPISODE = (/** @type {string} */ postEpisodeSelection) 
 
   setTimeout(() => {
     const episodesForSeason = Array.from(
-      document.querySelectorAll('div[data-program-type="episode"]')
+      document.querySelectorAll('a[data-testid=set-item]')
     );
     const randomEpisodeBtn =
       episodesForSeason[Math.floor(Math.random() * episodesForSeason.length)];
-    ${postEpisodeSelection}
+    ${postEpisodeSelection || ''}
     randomEpisodeBtn.click();
   }, 2000);`;
 
